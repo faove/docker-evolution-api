@@ -86,25 +86,36 @@ Este comando:
 
 ---
 
+## 📦 Verifica que el contenedor esté en ejecución
+
+Después de levantar el entorno con `docker compose up -d`, puedes verificar que Evolution API se esté ejecutando correctamente con:
+
+```bash
+docker ps
+```
+
+Deberías ver una salida similar a esta:
+
+```bash
+CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS              PORTS                                                                                   NAMES
+e3b6d8e6c317   atendai/evolution-api:latest     "/bin/bash -c '. ./D…"   28 seconds ago   Up 26 seconds       0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp                                            evolution_api
+```
+
+---
+
 ## 🌐 Acceso a la aplicación
 
 Accede desde el navegador (o usa `curl`) en:
 
 ```
-http://IP_DEL_SERVIDOR:8080
+http://IP_DEL_SERVIDOR:8080/manager
 ```
 
+![Diagrama del entorno Evolution API](docs/login.png)
+
+> Ingresa en el campo API Key Global el valor que asignaste en el archivo .env  
 > Reemplaza `8080` con el puerto configurado si usaste otro.  
-> Si estás en localhost, puedes usar `http://localhost:8080`
-
----
-
-## 🔧 Comandos útiles
-
-```bash
-# Ver el estado de los contenedores
-docker ps
-```
+> Si estás en localhost, puedes usar `http://localhost:8080/manager`
 
 ---
 
