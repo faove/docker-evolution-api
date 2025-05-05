@@ -37,7 +37,7 @@ También se recomienda agregar tu usuario al grupo `docker` para evitar usar `su
 ### 1. Clona este repositorio
 
 ```bash
-git https://github.com/devalexcode/docker-evolution-api.git
+git clone https://github.com/devalexcode/docker-evolution-api.git
 cd docker-evolution-api
 ```
 
