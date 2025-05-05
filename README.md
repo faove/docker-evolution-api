@@ -150,6 +150,6 @@ Deberías ver una regla como:
 ## 👨‍💻 Autor
 
 Desarrollado por [Alejandro Robles | Devalex ](http://devalexcode.com)  
-¿Necesitas que lo haga por ti? ¡Estoy para apoyarte! 🤝 http://devalexcode.com/soluciones/docker-evolution-api-vps
+¿Necesitas que lo haga por ti? ¡Estoy para apoyarte! 🤝 http://devalexcode.com/soluciones/evolution-api-whatsapp-en-servidor-vps
 
 ¿Dudas o sugerencias? ¡Contribuciones bienvenidas!
