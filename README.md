@@ -59,17 +59,33 @@ nano .env
 Edita el archivo `.env` con tus propios valores:
 
 ```dotenv
-# 🔐 EVOLUTION API
-AUTHENTICATION_API_KEY=tu_clave_api_aqui           # Clave de autenticación para la API de Evolution
-EVOLUTION_API_PORT=8080                            # Puerto donde se expondrá la API (si tienes otra aplicación corriendo por este puerto cambia este valor)
+############################################
+# 🔐 Evolution API
+############################################
 
-# 🧠 REDIS
-REDIS_PORT=6379                                     # Puerto por defecto de Redis
+# ------------------------------------------
+AUTHENTICATION_API_KEY=api_key # Clave de autenticación para Evolution API (Contraseña de administrador)
+# ------------------------------------------
+EVOLUTION_API_PORT=8080 # Puerto de escucha para Evolution API
+# ------------------------------------------
 
-# 🐘 POSTGRESQL
-POSTGRESS_PORT=5432                                 # Puerto por defecto de PostgreSQL
-POSTGRESS_USER=usuario_postgres                     # Usuario de la base de datos (POR SEGURIDAD MODIFICA ESTE VALOR)
-POSTGRESS_PASS=clave_segura                         # Contraseña del usuario (POR SEGURIDAD MODIFICA ESTE VALOR)
+############################################
+# 🐘 PostgreSQL
+############################################
+
+# ------------------------------------------
+POSTGRESS_USER=user # Usuario de PostgreSQL (POR SEGURIDAD MODIFICA ESTE VALOR)
+# ------------------------------------------
+POSTGRESS_PASS=123456 # Contraseña de PostgreSQL (POR SEGURIDAD MODIFICA ESTE VALOR)
+# ------------------------------------------
+POSTGRESS_PORT=5432 # Puerto de PostgreSQL (Se sugiere no modificar)
+# ------------------------------------------
+
+############################################
+# 🧠 Redis
+############################################
+
+REDIS_PORT=6379 # Puerto de Redis (Se sugiere no modificar)
 ```
 
 ### 3. Levanta los servicios
@@ -116,34 +132,6 @@ http://IP_DEL_SERVIDOR:8080/manager
 > Ingresa en el campo API Key Global el valor que asignaste en el archivo .env  
 > Reemplaza `8080` con el puerto configurado si usaste otro.  
 > Si estás en localhost, puedes usar `http://localhost:8080/manager`
-
----
-
-## 🔐 Exponer el puerto de Evolution API (opcional)
-
-Si estás en un servidor Linux con `ufw` (firewall) activado, puedes exponer únicamente el puerto necesario para acceder a la Evolution API desde el exterior.
-
-### ✅ Permitir solo el puerto definido en `.env` (por ejemplo, 8080)
-
-```bash
-sudo ufw allow 8080
-```
-
-> Asegúrate de que el valor de `EVOLUTION_API_PORT` en tu `.env` coincida con el puerto que estás abriendo.
-
-### 🔍 Verifica que el puerto está permitido
-
-```bash
-sudo ufw status
-```
-
-Deberías ver una regla como:
-
-```
-8080                       ALLOW       Anywhere
-```
-
-> ⚠️ No abras puertos que no necesites desde el exterior. Si solo vas a consumir la API localmente (dentro del mismo contenedor o red Docker), **no necesitas abrir el puerto con UFW**.
 
 ---
 
