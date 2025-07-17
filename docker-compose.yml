@@ -29,6 +29,8 @@ services:
       - evolution_redis:/data
     ports:
       - ${REDIS_PORT}:6379
+    expose:
+      - 6379
 
   postgres:
     container_name: postgres
