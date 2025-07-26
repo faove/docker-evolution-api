@@ -6,12 +6,20 @@ services:
     depends_on:
       - redis
       - postgres
-    ports:
-      - ${EVOLUTION_API_PORT}:8080
+    environment:
+      - API_HOST=evolution.xservice.com.ar   # Change as needed for your domain
+      - API_PORT=8080
+      # Add other environment variables as needed
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.evolution.rule=Host(`evolution.xservice.com.ar`)"  # Change domain as needed
+      - "traefik.http.routers.evolution.entrypoints=websecure"
+      - "traefik.http.routers.evolution.tls.certresolver=letsencrypt"
+      - "traefik.http.services.evolution.loadbalancer.server.port=8080"
+    networks:
+      - net_service
     volumes:
       - evolution_instances:/evolution/instances
-    networks:
-      - evolution-net
     env_file:
       - .env
     expose:
@@ -19,29 +27,25 @@ services:
 
   redis:
     image: redis:latest
-    restart: always
     networks:
-      - evolution-net
+      - net_service
     container_name: redis
     command: >
       redis-server --port 6379 --appendonly yes
     volumes:
       - evolution_redis:/data
     ports:
-      - ${REDIS_PORT}:6379
-    expose:
-      - 6379
+      - 6379:6379
 
   postgres:
     container_name: postgres
     image: postgres:15
     networks:
-      - evolution-net
-    command:
-      ["postgres", "-c", "max_connections=1000", "-c", "listen_addresses=*"]
+      - net_service
+    command: ["postgres", "-c", "max_connections=1000", "-c", "listen_addresses=*"]
     restart: always
     ports:
-      - ${POSTGRESS_PORT}:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=${POSTGRESS_USER}
       - POSTGRES_PASSWORD=${POSTGRESS_PASS}
@@ -58,6 +62,5 @@ volumes:
   postgres_data:
 
 networks:
-  evolution-net:
-    name: evolution-net
-    driver: bridge
+  net_service:
+    external: true
